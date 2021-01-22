@@ -1,17 +1,8 @@
+<a href='https://urbandisplacement.org/'><img src='.assets/images/blue_udp_logo.png' align="right" height="120" /></a>  
 
-<!-- PROJECT LOGO -->
-<br />
-<p align="center">
-  <a href='https://www.urbandisplacement.org/'>
-  	<img src='.assets/images/blue_udp_logo.png' align="top" height="120">
-  </a>
+# Displacement and Gentrification Typologies
 
-  <h3 align="center">Urban Displacement Project</h3>
-  <p align="center"> 
-  	Displacement and Gentrification Typologies
-   	<br />
-   </p>
-</p>
+[![DOI](https://zenodo.org/badge/214491182.svg)](https://zenodo.org/badge/latestdoi/214491182)  
 
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
@@ -21,7 +12,8 @@
 * [Code & Usage](#Code-&-Usage)
 * [Contact](#contact)
 * [Existing Maps](#existing-maps)
-
+* [Download Data](#download-data)
+* [Cite the Code](#citation)
 
 <!-- ABOUT THE PROJECT -->
 ## Project Overview
@@ -53,29 +45,37 @@ To run the code, fork this repository and navigate to the `code/README.md` file 
 <!-- CONTACT -->
 ## Contact or issues
  
-If you find a bug or have questions about our code, analysis, or anything else regarding this repo/project, please create an [issue](https://github.com/urban-displacement/displacement-typologies/issues) and ping `@timathomas`. You're also welcome to reach out via email at <info@urbandisplacement.org> to ask us for questions, help, or suggestions.
+This is a work in progress and we happily invite community feedback and collaboration in improving this work. If you find a bug or have questions about our code, analysis, or anything else regarding this repo/project, please create an [issue](https://github.com/urban-displacement/displacement-typologies/issues) and ping `@timathomas`. You're also welcome to reach out via email at <info@urbandisplacement.org> to ask us for questions, help, or suggestions.
  
 <!-- EXISTING MAPS -->
-## Existing Maps: 
+## Existing Maps
 
 * Atlanta: 
-  * [2018 Map](https://urban-displacement.github.io/displacement-typologies/maps/atlanta_udp.html) ([Download Data](https://github.com/urban-displacement/displacement-typologies/blob/main/data/outputs/typologies/Atlanta_typology_output.csv)), 
-  * [2017 Map](https://urban-displacement.github.io/displacement-typologies/maps/atlanta_sparcc.html) ([Download Data](https://github.com/urban-displacement/displacement-typologies/blob/main/data/outputs/typologies/Atlanta_typology_output_2017.csv))
+  * [2018 Map](https://urban-displacement.github.io/displacement-typologies/maps/atlanta_udp.html)
+  * [2017 Map](https://urban-displacement.github.io/displacement-typologies/maps/atlanta_sparcc.html)
 * Bay Area: 
-  * [2018 Map](https://urban-displacement.github.io/displacement-typologies/maps/sanfrancisco_udp.html) ([Download Data](https://github.com/urban-displacement/displacement-typologies/blob/main/data/outputs/typologies/SanFrancisco_typology_output.csv))
+  * [2018 Map](https://urban-displacement.github.io/displacement-typologies/maps/sanfrancisco_udp.html)
 * Chicago: 
-  * [2018 Map](https://urban-displacement.github.io/displacement-typologies/maps/chicago_udp.html) ([Doanlowd Data](https://github.com/urban-displacement/displacement-typologies/blob/main/data/outputs/typologies/Chicago_typology_output.csv)), 
-  * [2017 Map](https://urban-displacement.github.io/displacement-typologies/maps/chicago_sparcc.html) ([Download Data](https://github.com/urban-displacement/displacement-typologies/blob/main/data/outputs/typologies/Chicago_typology_output_2017.csv))
+  * [2018 Map](https://urban-displacement.github.io/displacement-typologies/maps/chicago_udp.html)
+  * [2017 Map](https://urban-displacement.github.io/displacement-typologies/maps/chicago_sparcc.html)
 * Cleveland: 
-  * [2018 Map](https://urban-displacement.github.io/displacement-typologies/maps/cleveland_udp.html) ([Download Data](https://github.com/urban-displacement/displacement-typologies/blob/main/data/outputs/typologies/Cleveland_typology_output.csv))
+  * [2018 Map](https://urban-displacement.github.io/displacement-typologies/maps/cleveland_udp.html)
 * Denver:
-  * [2018 Map](https://urban-displacement.github.io/displacement-typologies/maps/denver_udp.html) ([Download Data](https://github.com/urban-displacement/displacement-typologies/blob/main/data/outputs/typologies/Denver_typology_output.csv))
-  * [2017 Map](https://urban-displacement.github.io/displacement-typologies/maps/denver_sparcc.html) ([Download Data](https://github.com/urban-displacement/displacement-typologies/blob/main/data/outputs/typologies/Denver_typology_output_2017.csv))
+  * [2018 Map](https://urban-displacement.github.io/displacement-typologies/maps/denver_udp.html)
+  * [2017 Map](https://urban-displacement.github.io/displacement-typologies/maps/denver_sparcc.html)
 * Los Angeles: 
-  * [2018 Map](https://urban-displacement.github.io/displacement-typologies/maps/losangeles_udp.html) ([Download Data](https://github.com/urban-displacement/displacement-typologies/blob/main/data/outputs/typologies/LosAngeles_typology_output.csv))
+  * [2018 Map](https://urban-displacement.github.io/displacement-typologies/maps/losangeles_udp.html)
 * Memphis: 
-  * [2017 Map](https://urban-displacement.github.io/displacement-typologies/maps/memphis_sparcc.html) ([Download Data](https://github.com/urban-displacement/displacement-typologies/blob/main/data/outputs/typologies/Memphis_typology_output_2017.csv))
+  * [2017 Map](https://urban-displacement.github.io/displacement-typologies/maps/memphis_sparcc.html)
 * Seattle/Puget Sound: 
-  * [2018 Map](https://urban-displacement.github.io/displacement-typologies/maps/seattle_udp.html) ([Download Data](https://github.com/urban-displacement/displacement-typologies/blob/main/data/outputs/typologies/Seattle_typology_output.csv))
+  * [2018 Map](https://urban-displacement.github.io/displacement-typologies/maps/seattle_udp.html)
 
+<!-- DOWNLOAD DATA -->
+## Download Data
 
+* GeoPackages (similar to shapefiles) & CSV's with GEOID & Typologies: [Download](https://github.com/urban-displacement/displacement-typologies/tree/main/data/downloads_for_public)
+* Full typology data as CSV: [Download](https://github.com/urban-displacement/displacement-typologies/tree/main/data/outputs/typologies)
+* Codebook for full typology dataset: [link](https://github.com/urban-displacement/displacement-typologies/blob/main/data/outputs/typologies/typologies_codebook.md)
+
+## Citation
+Thomas, Tim, Anna Driscoll, Gabriela Picado Aguilar, Carson Hartman, Julia Greenberg, Alex Ramiller, Anna Cash, Miriam Zuk, and Karen Chapple. “Urban-displacement/displacement-typologies: Release 1.1”. https://github.com/urban-displacement/displacement-typologies. doi:10.5281/zenodo.4356684.

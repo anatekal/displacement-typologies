@@ -24,13 +24,14 @@ options(scipen = 10) # avoid scientific notation
 
 # load packages
 if (!require("pacman")) install.packages("pacman")
-p_install_gh("timathomas/neighborhood", "jalvesaq/colorout")
-p_load(colorout, neighborhood, readxl, R.utils, bit64, neighborhood, fst, rmapshaper, sf, geojsonsf, scales, data.table, tigris, tidycensus, leaflet, tidyverse)
+if (!require("tidyverse")) install.packages("tidyverse")
+pacman::p_install_gh("timathomas/neighborhood", "jalvesaq/colorout")
+pacman::p_load(colorout, readxl, R.utils, bit64, neighborhood, rmapshaper, sf, geojsonsf, scales, data.table, tigris, tidycensus, leaflet, tidyverse)
 
 update.packages(ask = FALSE)
-no
 # Cache downloaded tiger files
 options(tigris_use_cache = TRUE)
+census_api_key('4c26aa6ebbaef54a55d3903212eabbb506ade381') #enter your own key here
 
 # ==========================================================================
 # Data
@@ -264,7 +265,17 @@ df <-
             factor( # turn to factor for mapping 
                 case_when(
                     tr_pstudents > .3 ~ "High Student Population",
+            ## Typology ammendments
                     typ_cat == "['AdvG', 'BE']" ~ 'Advanced Gentrification',
+                    typ_cat == "['LISD']" & gent_90_00 == 1 ~ 'Advanced Gentrification',
+                    typ_cat == "['LISD']" & gent_90_00_urban == 1 ~ 'Advanced Gentrification',
+                    typ_cat == "['OD']" & gent_90_00 == 1 ~ 'Advanced Gentrification',
+                    typ_cat == "['OD']" & gent_90_00_urban == 1 ~ 'Advanced Gentrification',
+                    typ_cat == "['LISD']" & gent_00_18 == 1 ~ 'Early/Ongoing Gentrification',
+                    typ_cat == "['LISD']" & gent_00_18_urban == 1 ~ 'Early/Ongoing Gentrification',
+                    typ_cat == "['OD']" & gent_00_18 == 1 ~ 'Early/Ongoing Gentrification',
+                    typ_cat == "['OD']" & gent_00_18_urban == 1 ~ 'Early/Ongoing Gentrification',
+            ## Regular adjustments
                     typ_cat == "['AdvG']" ~ 'Advanced Gentrification',
                     typ_cat == "['ARE']" ~ 'At Risk of Becoming Exclusive',
                     typ_cat == "['ARG']" ~ 'At Risk of Gentrification',
@@ -272,7 +283,7 @@ df <-
                     typ_cat == "['EOG']" ~ 'Early/Ongoing Gentrification',
                     typ_cat == "['OD']" ~ 'Ongoing Displacement',
                     typ_cat == "['SAE']" ~ 'Stable/Advanced Exclusive', 
-                    typ_cat == "['SLI']" ~ 'Low-Income/Susceptible to Displacement',
+                    typ_cat == "['LISD']" ~ 'Low-Income/Susceptible to Displacement',
                     typ_cat == "['SMMI']" ~ 'Stable Moderate/Mixed Income',
                     TRUE ~ "Unavailable or Unreliable Data"
                 ), 
@@ -384,6 +395,7 @@ df <-
 #     select(GEOID) %>% 
 #     mutate(GEOID = as.numeric(GEOID)) %>% 
 #     st_transform(st_crs(4326)) 
+
 #     saveRDS(tracts, '~/git/displacement-typologies/data/outputs/downloads/state_tracts.RDS')
 ###
 # End
@@ -522,7 +534,7 @@ red <-
 ### Industrial points
 
 industrial <- 
-    read_excel("/Users/timthomas/git/displacement-typologies/data/overlays/industrial/industrial_NATIONAL.xlsx") %>% 
+    read_excel("~/git/displacement-typologies/data/overlays/industrial/industrial_NATIONAL.xlsx") %>% 
     filter(Latitude != '') %>% 
     st_as_sf(
         coords = c('Longitude', 'Latitude'), 
@@ -609,12 +621,12 @@ university <-
 #     st_join(., df_sf_urban %>% select(city), join = st_intersects) %>% 
 #     mutate(rt = case_when(RTTYP == 'I' ~ 'Interstate', RTTYP == 'U' ~ 'US Highway')) %>% 
 #     filter(!is.na(city))
-# st_write(road_map, '~/git/displacement-typologies/data/outputs/downloads/roads.gpkg', append = FALSE)
+# saveRDS(road_map, '~/git/displacement-typologies/data/outputs/downloads/roads.rds')
 ###
 # End
 ###
 
-road_map <- st_read('~/git/displacement-typologies/data/outputs/downloads/roads.gpkg')
+road_map <- readRDS('~/git/displacement-typologies/data/outputs/downloads/roads.rds')
 
 ### Atlanta Beltline
 beltline <- 
@@ -1204,3 +1216,25 @@ seattle <-
     setView(lng = -122.3, lat = 47.6, zoom = 9)
 # save map
 htmlwidgets::saveWidget(seattle, file="~/git/displacement-typologies/maps/seattle_udp.html")
+ 
+#
+# Create file exports
+# --------------------------------------------------------------------------
+atl_sf <- df_sf_urban %>% filter(city == "Atlanta") %>% select(GEOID, Typology)
+st_write(atl_sf, "~/git/displacement-typologies/data/downloads_for_public/atlanta.gpkg", append=FALSE)
+write_csv(atl_sf %>% st_set_geometry(NULL), "~/git/displacement-typologies/data/downloads_for_public/atlanta.csv")
+chi_sf <- df_sf_urban %>% filter(city == "Chicago") %>% select(GEOID, Typology)
+st_write(chi_sf, "~/git/displacement-typologies/data/downloads_for_public/chicago.gpkg", append=FALSE)
+write_csv(chi_sf %>% st_set_geometry(NULL), "~/git/displacement-typologies/data/downloads_for_public/chicago.csv")
+den_sf <- df_sf_urban %>% filter(city == "Denver") %>% select(GEOID, Typology)
+st_write(den_sf, "~/git/displacement-typologies/data/downloads_for_public/denver.gpkg", append=FALSE)
+write_csv(den_sf %>% st_set_geometry(NULL), "~/git/displacement-typologies/data/downloads_for_public/denver.csv")
+la_sf <- df_sf_urban %>% filter(city == "LosAngeles") %>% select(GEOID, Typology)
+st_write(la_sf, "~/git/displacement-typologies/data/downloads_for_public/losangeles.gpkg", append=FALSE)
+write_csv(la_sf %>% st_set_geometry(NULL), "~/git/displacement-typologies/data/downloads_for_public/losangeles.csv")
+sf_sf <- df_sf_urban %>% filter(city == "SanFrancisco") %>% select(GEOID, Typology)
+st_write(sf_sf, "~/git/displacement-typologies/data/downloads_for_public/sanfrancisco.gpkg", append=FALSE)
+write_csv(sf_sf %>% st_set_geometry(NULL), "~/git/displacement-typologies/data/downloads_for_public/sanfrancisco.csv")
+sea_sf <- df_sf_urban %>% filter(city == "Seattle") %>% select(GEOID, Typology)
+st_write(sea_sf, "~/git/displacement-typologies/data/downloads_for_public/seattle.gpkg", append=FALSE)
+write_csv(sea_sf %>% st_set_geometry(NULL), "~/git/displacement-typologies/data/downloads_for_public/seattle.csv")
